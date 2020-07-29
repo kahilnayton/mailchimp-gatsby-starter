@@ -10,7 +10,7 @@ const CleanInputContainer = styled.input`
   padding: 0;
 `
 
-class CleanInput extends Component {
+export default class CleanInput extends Component {
   render() {
     const { children, ...props } = this.props;
 
@@ -25,4 +25,3 @@ class CleanInput extends Component {
   }
 }
 
-export default CleanInput;

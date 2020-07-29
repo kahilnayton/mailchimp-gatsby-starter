@@ -1,6 +1,5 @@
 import React from 'react'
-import styled from '@emotion/styled';
-import colors from 'styles/colors';
+import styled from '@emotion/styled/macro';
 
 const CheckboxContainer = styled.div`
   display: inline-block;
@@ -30,13 +29,13 @@ const StyledCheckbox = styled.div`
   display: inline-block;
   width: 2rem;
   height: 2rem;
-  background: ${props => (props.checked ? colors.teal600 : 'white')};
+  background: ${props => (props.checked ? 'teal' : 'white')};
   border-radius: 3px;
-  outline: ${props => (props.isFooter && !props.checked ? `1px solid ${colors.grey700}` : 'none')};
+  outline: ${props => (props.isFooter && !props.checked ? `1px solid grey` : 'none')};
   transition: all 150ms;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px ${colors.grey200};
+    box-shadow: 0 0 0 3px grey;
   }
 
   ${Icon} {
@@ -47,7 +46,7 @@ const StyledCheckbox = styled.div`
 const Checkbox = ({ className, footer, modal, checked, ...props }) => (
   <CheckboxContainer className={className}>
     <HiddenCheckbox type='checkbox' checked={checked} {...props} />
-    <StyledCheckbox checked={checked} isFooter={footer}>
+    <StyledCheckbox checked={checked}>
       <Icon viewBox="0 0 24 24" modal={modal}>
         <polyline points="20 6 9 17 4 12" />
       </Icon>

@@ -49,7 +49,7 @@ const CheckBoxContainerOne = styled.div`
   h6 {
     grid-row: 1 / 3;
     grid-column: 2;
-    color: ${colors.teal600};
+    color: teal;
     padding-bottom: 7rem;
   }
 
@@ -127,11 +127,6 @@ const Input = styled.input`
   }
 `;
 
-const SignMeUp = styled.div`
-  color: teal;
-  font-size: 1.6rem;
-`;
-
 const StatusMessage = styled.div`
   font-size: 1.6rem;
 `;
@@ -162,7 +157,7 @@ export default class ContactForm extends Component {
       const result = await addToMailchimp(this.state.email, {
         FNAME: this.state.firstName,
         LNAME: this.state.lastName,
-        'group[6172][281474976710656]': '281474976710656',
+        'group[]': '1',
       });
       this.setState({ MailChimpResult: result });
     }
@@ -171,7 +166,7 @@ export default class ContactForm extends Component {
       const result = await addToMailchimp(this.state.email, {
         FNAME: this.state.firstName,
         LNAME: this.state.lastName,
-        'group[3971][262144]': '262144',
+        'group[]': '1',
       });
       this.setState({ MailChimpResult: result });
     }
@@ -180,8 +175,8 @@ export default class ContactForm extends Component {
       const result = await addToMailchimp(this.state.email, {
         FNAME: this.state.firstName,
         LNAME: this.state.lastName,
-        'group[3971][262144]': '262144',
-        'group[6172][281474976710656]': '281474976710656',
+        'group[]': '2',
+        'group[]': '2',
       });
       this.setState({ MailChimpResult: result });
     }
@@ -244,19 +239,17 @@ export default class ContactForm extends Component {
       statusMessage,
     } = this.state;
 
-    const { contactPage } = this.props;
-
     return (
       <>
         <Form
-          name="contact-leading-edge"
+          name="form-name"
           method="post"
           action="/thanks/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={this.handleSubmit}
         >
-          <input type="hidden" name="form-name" value="contact-leading-edge" />
+          <input type="hidden" name="form-name" value="contact-form" />
 
           <div className="first-name">
             <Input
@@ -324,8 +317,6 @@ export default class ContactForm extends Component {
             <label htmlFor="message">Message</label>
           </div>
 
-          <SignMeUp>{contactPage.sign_me_up_text[0].text}</SignMeUp>
-
           <CheckBoxContainerOne>
             <label htmlFor={this.state.subscribeMailingList}>
               <Checkbox
@@ -335,9 +326,6 @@ export default class ContactForm extends Component {
               />
             </label>
 
-            <h6>{contactPage.newsletter_checkbox_title[0].text}</h6>
-
-            <p>{contactPage.newsletter_checkbox_description[0].text}</p>
           </CheckBoxContainerOne>
 
           <CheckBoxContainerTwo>
@@ -349,14 +337,11 @@ export default class ContactForm extends Component {
               />
             </label>
 
-            <h6>{contactPage.careerhub_checkbox_title[0].text}</h6>
-
-            <p>{contactPage.careerhub_checkbox_description[0].text}</p>
           </CheckBoxContainerTwo>
 
           {statusMessage && <StatusMessage>{statusMessage}</StatusMessage>}
 
-          <FormButton type="submit">Join the Community</FormButton>
+          <FormButton type="submit">Submit</FormButton>
         </Form>
       </>
     );
